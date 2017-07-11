@@ -16,18 +16,30 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class HmacEncryptor {
 
+  public static final String HMAC_MD5 = "HmacMD5";
+  public static final String HMAC_SHA1 = "HmacSHA1";
+  public static final String HMAC_SHA224 = "HmacSHA224";
+  public static final String HMAC_SHA256 = "HmacSHA256";
+  public static final String HMAC_SHA384 = "HmacSHA384";
+  public static final String HMAC_SHA512 = "HmacSHA512";
+  @StringDef({HMAC_MD5, HMAC_SHA1, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512})
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface HmacAlgorithm {
+
+  }
+
   private String algorithm;
 
   public HmacEncryptor(@NonNull @HmacAlgorithm String algorithm) {
     this.algorithm = algorithm;
   }
 
-  public String encrypt(@NonNull String data, @NonNull String key) {
-    return ConvertsUtils.bytes2HexString(encrypt(data.getBytes(), key.getBytes()));
-  }
-
   public byte[] encrypt(@NonNull byte[] data, @NonNull byte[] key) {
     return hmacModule(data, key, algorithm);
+  }
+
+  public String encrypt2String(@NonNull byte[] data, @NonNull byte[] key) {
+    return ConvertsUtils.bytes2HexString(encrypt(data, key));
   }
 
   private byte[] hmacModule(@NonNull final byte[] data, @NonNull final byte[] key,
@@ -45,23 +57,5 @@ public class HmacEncryptor {
       e.printStackTrace();
       return null;
     }
-  }
-
-  public static final String HMAC_MD5 = "HmacMD5";
-
-  public static final String HMAC_SHA1 = "HmacSHA1";
-
-  public static final String HMAC_SHA224 = "HmacSHA224";
-
-  public static final String HMAC_SHA256 = "HmacSHA256";
-
-  public static final String HMAC_SHA384 = "HmacSHA384";
-
-  public static final String HMAC_SHA512 = "HmacSHA512";
-
-  @StringDef({HMAC_MD5, HMAC_SHA1, HMAC_SHA224, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512})
-  @Retention(RetentionPolicy.SOURCE)
-  public @interface HmacAlgorithm {
-
   }
 }

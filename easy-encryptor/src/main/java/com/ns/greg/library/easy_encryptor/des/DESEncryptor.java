@@ -72,29 +72,6 @@ public class DESEncryptor {
    * Encrypts data
    *
    * @param data content that need to be encrypted
-   * @param key encrypted key (16/24/32 bytes)
-   * @return encrypted HEX string
-   */
-  public String encrypt2HexString(@NonNull byte[] data, @NonNull byte[] key) {
-    return ConvertsUtils.bytes2HexString(encrypt(data, key));
-  }
-
-  /**
-   *  Encrypts data
-   *
-   * @param data content that need to be encrypted
-   * @param key encrypted key (16/24/32 bits)
-   * @param iv encrypted iv (16 bits)
-   * @return encrypted HEX string
-   */
-  public String encrypt2HexString(@NonNull byte[] data, @NonNull byte[] key, @NonNull byte[] iv) {
-    return ConvertsUtils.bytes2HexString(encrypt(data, key, iv));
-  }
-
-  /**
-   * Encrypts data
-   *
-   * @param data content that need to be encrypted
    * @param key encrypted key (16/24/32 bits)
    * @return encrypted data
    */
@@ -114,6 +91,29 @@ public class DESEncryptor {
     return desModule(data, key, iv, true);
   }
 
+  /**
+   *  Encrypts data
+   *
+   * @param data content that need to be encrypted
+   * @param key encrypted key (16/24/32 bits)
+   * @param iv encrypted iv (16 bits)
+   * @return encrypted  string
+   */
+  public String encrypt2String(@NonNull byte[] data, @NonNull byte[] key, @Nullable byte[] iv) {
+    return ConvertsUtils.bytes2HexString(encrypt(data, key, iv));
+  }
+
+  /**
+   * Encrypts data
+   *
+   * @param data content that need to be encrypted
+   * @param key encrypted key (16/24/32 bytes)
+   * @return encrypted  string
+   */
+  public String encrypt2String(@NonNull byte[] data, @NonNull byte[] key) {
+    return encrypt2String(data, key, null);
+  }
+
   /*--------------------------------
    * DECRYPT
    *-------------------------------*/
@@ -123,35 +123,10 @@ public class DESEncryptor {
    *
    * @param data content that need to be decrypted
    * @param key decrypted key (16/24/32 bits)
-   * @return decrypted string
-   * @throws IllegalArgumentException
-   */
-  public String decrypt2HexString(@NonNull byte[] data, @NonNull byte[] key) throws IllegalArgumentException {
-    return ConvertsUtils.bytes2HexString(decrypt(data, key, null));
-  }
-
-  /**
-   * Decrypts data
-   *
-   * @param data content that need to be decrypted
-   * @param key decrypted key (16/24/32 bits)
-   * @param iv decrypted iv (16 bits)
-   * @return decrypted string
-   * @throws IllegalArgumentException
-   */
-  public String decrypt2HexString(@NonNull byte[] data, @NonNull byte[] key, @NonNull byte[] iv) throws IllegalArgumentException {
-    return ConvertsUtils.bytes2HexString(decrypt(data, key, iv));
-  }
-
-  /**
-   * Decrypts data
-   *
-   * @param data content that need to be decrypted
-   * @param key decrypted key (16/24/32 bits)
    * @return decrypted data
    */
   public byte[] decrypt(@NonNull byte[] data, @NonNull byte[] key) {
-    return desModule(data, key, null, false);
+    return decrypt(data, key, null);
   }
 
   /**
@@ -162,17 +137,40 @@ public class DESEncryptor {
    * @param iv decrypted iv (16 bits)
    * @return decrypted data
    */
-  public byte[] decrypt(@NonNull byte[] data, @NonNull byte[] key, @NonNull byte[] iv) {
+  public byte[] decrypt(@NonNull byte[] data, @NonNull byte[] key, @Nullable byte[] iv) {
     return desModule(data, key, iv, false);
+  }
+
+  /**
+   * Decrypts data
+   *
+   * @param data content that need to be decrypted
+   * @param key decrypted key (16/24/32 bits)
+   * @return decrypted string
+   */
+  public String decrypt2String(@NonNull byte[] data, @NonNull byte[] key) {
+    return decrypt2String(data, key, null);
+  }
+
+  /**
+   * Decrypts data
+   *
+   * @param data content that need to be decrypted
+   * @param key decrypted key (16/24/32 bits)
+   * @param iv decrypted iv (16 bits)
+   * @return decrypted string
+   */
+  public String decrypt2String(@NonNull byte[] data, @NonNull byte[] key, @NonNull byte[] iv) {
+    return ConvertsUtils.bytes2HexString(decrypt(data, key, iv));
   }
 
   /**
    * Data Encryption Standard Module
    *
-   * @param data data that need to encrypt2HexString/decrypt
-   * @param key encrypt2HexString/decrypt key
-   * @param iv encrypt2HexString/decrypt iv
-   * @param isEncrypt encrypt2HexString mode or decrypt mode
+   * @param data data that need to encrypt2String/decrypt
+   * @param key encrypt2String/decrypt key
+   * @param iv encrypt2String/decrypt iv
+   * @param isEncrypt encrypt2String mode or decrypt mode
    * @return encrypted/decrypted data
    */
   private byte[] desModule(final byte[] data, final byte[] key, final byte[] iv,

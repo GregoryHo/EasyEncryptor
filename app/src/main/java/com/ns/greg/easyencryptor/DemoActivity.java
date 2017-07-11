@@ -3,7 +3,7 @@ package com.ns.greg.easyencryptor;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import com.ns.greg.library.easy_encryptor.ConvertsUtils;
-import com.ns.greg.library.easy_encryptor.base64.Base64Encryptor;
+import com.ns.greg.library.easy_encryptor.base64.Base64Encoder;
 import com.ns.greg.library.easy_encryptor.des.DESEncryptor;
 import com.ns.greg.library.easy_encryptor.hmac.HmacEncryptor;
 
@@ -28,15 +28,15 @@ public class DemoActivity extends AppCompatActivity {
     String key = "0123456789abcdef";
 
     byte[] aesEncrypt = desEncryptor.encrypt(content.getBytes(), key.getBytes(), iv.getBytes());
-    byte[] encode64 = Base64Encryptor.encode(aesEncrypt);
-    byte[] decode64 = Base64Encryptor.decode(encode64);
+    byte[] encode64 = Base64Encoder.encode(aesEncrypt);
+    byte[] decode64 = Base64Encoder.decode(encode64);
     byte[] aesDecrypt = desEncryptor.decrypt(decode64, key.getBytes(), iv.getBytes());
 
     Log.i(TAG,
         "content : "
             + content
             + "\n"
-            + "encrypt2HexString(AES) : "
+            + "encrypt2String(AES) : "
             + ConvertsUtils.bytes2HexString(aesEncrypt)
             + "\n"
             + "encode(BASE64) : "
@@ -45,11 +45,11 @@ public class DemoActivity extends AppCompatActivity {
             + "decode(BASE64) : "
             + ConvertsUtils.bytes2HexString(decode64)
             + "\n"
-            + "decrypt(AES) : "
+            + "decrypt2String(AES) : "
             + new String(aesDecrypt));
 
     HmacEncryptor hmacEncryptor = new HmacEncryptor(HmacEncryptor.HMAC_MD5);
-    String md5 = hmacEncryptor.encrypt(content, key);
-    Log.i(TAG, "encrypt2HexString(MD5) : " + md5);
+    String md5 = hmacEncryptor.encrypt2String(content.getBytes(), key.getBytes());
+    Log.i(TAG, "encrypt2String(MD5) : " + md5);
   }
 }

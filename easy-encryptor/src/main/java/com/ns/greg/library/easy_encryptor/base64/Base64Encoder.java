@@ -11,7 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  * Created by Gregory on 2017/7/11.
  */
 
-public class Base64Encryptor {
+public class Base64Encoder {
 
   /**
    * Default values for encoder/decoder flags.
@@ -61,39 +61,39 @@ public class Base64Encryptor {
    * ENCODE
    *-------------------------------*/
 
-  public static String encode2String(@NonNull byte[] data) {
-    return new String(encode(data));
-  }
-
-  public static String encode2String(@NonNull byte[] data, @Base64Flag final int flag) {
-    return new String(encode(data, flag));
-  }
-
   public static byte[] encode(@NonNull byte[] data) {
-    return Base64.encode(data, Base64.DEFAULT);
+    return encode(data, DEFAULT);
   }
 
   public static byte[] encode(@NonNull byte[] data, @Base64Flag final int flag) {
     return Base64.encode(data, flag);
   }
 
+  public static String encode2String(@NonNull byte[] data) {
+    return encode2String(data, DEFAULT);
+  }
+
+  public static String encode2String(@NonNull byte[] data, @Base64Flag final int flag) {
+    return new String(encode(data, flag));
+  }
+
   /*--------------------------------
    * DECODE
    *-------------------------------*/
 
-  public static String decode2HexString(@NonNull byte[] data) {
-    return ConvertsUtils.bytes2HexString(decode(data));
-  }
-
-  public static String decode2HexString(@NonNull byte[] data, @Base64Flag final int flag) {
-    return ConvertsUtils.bytes2HexString(decode(data, flag));
-  }
-
   public static byte[] decode(@NonNull byte[] data) {
-    return Base64.decode(data, Base64.DEFAULT);
+    return decode(data, DEFAULT);
   }
 
   public static byte[] decode(@NonNull byte[] data, @Base64Flag final int flag) {
     return Base64.decode(data, flag);
+  }
+
+  public static String decode2String(@NonNull byte[] data) {
+    return decode2String(data, DEFAULT);
+  }
+
+  public static String decode2String(@NonNull byte[] data, @Base64Flag final int flag) {
+    return ConvertsUtils.bytes2HexString(decode(data, flag));
   }
 }
