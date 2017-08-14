@@ -6,7 +6,8 @@ package com.ns.greg.library.easy_encryptor;
 
 public class ConvertsUtils {
 
-  private static final char HEX_DIGITS[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+  private static final char[] HEX_DIGITS =
+      { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
   public static String bytes2HexString(final byte[] bytes) {
     if (bytes == null) {
@@ -25,6 +26,21 @@ public class ConvertsUtils {
       hexChars[index] = HEX_DIGITS[value >>> 4];
       hexChars[index + 1] = HEX_DIGITS[value & 0x0F];
     }
+
+    return new String(hexChars);
+  }
+
+  /**
+   * Converts 1 byte value to HEX.
+   *
+   * @param aByte byte data
+   * @return HEX value as string
+   */
+  public static String byte2HEX(byte aByte) {
+    char[] hexChars = new char[2];
+    int value = aByte & 0xFF;
+    hexChars[0] = HEX_DIGITS[value >>> 4];
+    hexChars[1] = HEX_DIGITS[value & 0x0F];
 
     return new String(hexChars);
   }
