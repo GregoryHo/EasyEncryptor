@@ -36,11 +36,12 @@ public class ConvertsUtils {
    * @param aByte byte data
    * @return HEX value as string
    */
-  public static String byte2HEX(byte aByte) {
+  public static String byte2Hex(byte aByte) {
     char[] hexChars = new char[2];
     int value = aByte & 0xFF;
-    hexChars[0] = HEX_DIGITS[value >>> 4];
-    hexChars[1] = HEX_DIGITS[value & 0x0F];
+    int index = 0;
+    hexChars[index] = HEX_DIGITS[value >>> 4];
+    hexChars[index + 1] = HEX_DIGITS[value & 0x0F];
 
     return new String(hexChars);
   }

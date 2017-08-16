@@ -36,7 +36,7 @@ public class DemoActivity extends AppCompatActivity {
         "content : "
             + content
             + "\n"
-            + "encrypt2String(AES) : "
+            + "encrypt2HexString(AES) : "
             + ConvertsUtils.bytes2HexString(aesEncrypt)
             + "\n"
             + "encode(BASE64) : "
@@ -45,11 +45,11 @@ public class DemoActivity extends AppCompatActivity {
             + "decode(BASE64) : "
             + ConvertsUtils.bytes2HexString(decode64)
             + "\n"
-            + "decrypt2String(AES) : "
+            + "decrypt2HexString(AES) : "
             + new String(aesDecrypt));
 
     HmacEncryptor hmacEncryptor = new HmacEncryptor(HmacEncryptor.HMAC_MD5);
-    String md5 = hmacEncryptor.encrypt2String(content.getBytes(), key.getBytes());
-    Log.i(TAG, "encrypt2String(MD5) : " + md5);
+    String md5 = hmacEncryptor.encrypt2HexString(content.getBytes(), key.getBytes());
+    Log.i(TAG, "encrypt2HexString(MD5) : " + md5);
   }
 }

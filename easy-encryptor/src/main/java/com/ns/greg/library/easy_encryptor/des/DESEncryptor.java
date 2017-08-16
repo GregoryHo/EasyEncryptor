@@ -99,7 +99,7 @@ public class DESEncryptor {
    * @param iv encrypted iv (16 bits)
    * @return encrypted  string
    */
-  public String encrypt2String(@NonNull byte[] data, @NonNull byte[] key, @Nullable byte[] iv) {
+  public String encrypt2HexString(@NonNull byte[] data, @NonNull byte[] key, @Nullable byte[] iv) {
     return ConvertsUtils.bytes2HexString(encrypt(data, key, iv));
   }
 
@@ -110,8 +110,8 @@ public class DESEncryptor {
    * @param key encrypted key (16/24/32 bytes)
    * @return encrypted  string
    */
-  public String encrypt2String(@NonNull byte[] data, @NonNull byte[] key) {
-    return encrypt2String(data, key, null);
+  public String encrypt2HexString(@NonNull byte[] data, @NonNull byte[] key) {
+    return encrypt2HexString(data, key, null);
   }
 
   /*--------------------------------
@@ -148,8 +148,8 @@ public class DESEncryptor {
    * @param key decrypted key (16/24/32 bits)
    * @return decrypted string
    */
-  public String decrypt2String(@NonNull byte[] data, @NonNull byte[] key) {
-    return decrypt2String(data, key, null);
+  public String decrypt2HexString(@NonNull byte[] data, @NonNull byte[] key) {
+    return decrypt2HexString(data, key, null);
   }
 
   /**
@@ -160,17 +160,17 @@ public class DESEncryptor {
    * @param iv decrypted iv (16 bits)
    * @return decrypted string
    */
-  public String decrypt2String(@NonNull byte[] data, @NonNull byte[] key, @NonNull byte[] iv) {
+  public String decrypt2HexString(@NonNull byte[] data, @NonNull byte[] key, @NonNull byte[] iv) {
     return ConvertsUtils.bytes2HexString(decrypt(data, key, iv));
   }
 
   /**
    * Data Encryption Standard Module
    *
-   * @param data data that need to encrypt2String/decrypt
-   * @param key encrypt2String/decrypt key
-   * @param iv encrypt2String/decrypt iv
-   * @param isEncrypt encrypt2String mode or decrypt mode
+   * @param data data that need to encrypt2HexString/decrypt
+   * @param key encrypt2HexString/decrypt key
+   * @param iv encrypt2HexString/decrypt iv
+   * @param isEncrypt encrypt2HexString mode or decrypt mode
    * @return encrypted/decrypted data
    */
   private byte[] desModule(final byte[] data, final byte[] key, final byte[] iv,

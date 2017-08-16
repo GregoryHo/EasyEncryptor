@@ -38,7 +38,7 @@ public class HmacEncryptor {
     return hmacModule(data, key, algorithm);
   }
 
-  public String encrypt2String(@NonNull byte[] data, @NonNull byte[] key) {
+  public String encrypt2HexString(@NonNull byte[] data, @NonNull byte[] key) {
     return ConvertsUtils.bytes2HexString(encrypt(data, key));
   }
 
