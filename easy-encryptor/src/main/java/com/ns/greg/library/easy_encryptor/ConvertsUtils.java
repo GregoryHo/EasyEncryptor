@@ -9,19 +9,28 @@ public class ConvertsUtils {
   private static final char[] HEX_DIGITS =
       { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
-  public static String bytes2HexString(final byte[] bytes) {
-    if (bytes == null) {
+  public static String bytes2HexString(byte[] src) {
+    if (src == null || src.length == 0) {
       return null;
     }
 
-    int len = bytes.length;
-    if (len <= 0) {
+    return bytes2HexString(src, 0, src.length);
+  }
+
+  public static String bytes2HexString(byte[] src, int offset, int length) {
+    if (src == null) {
       return null;
     }
 
-    char[] hexChars = new char[len << 1];
-    for (int i = 0; i < len; i++) {
-      int value = bytes[i] & 0xFF;
+    int srcLength = src.length;
+    int copyLength = length + offset;
+    if (srcLength < copyLength) {
+      return null;
+    }
+
+    char[] hexChars = new char[copyLength << 1];
+    for (int i = offset; i < copyLength; i++) {
+      int value = src[i] & 0xFF;
       int index = i * 2;
       hexChars[index] = HEX_DIGITS[value >>> 4];
       hexChars[index + 1] = HEX_DIGITS[value & 0x0F];
