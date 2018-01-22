@@ -1,7 +1,6 @@
-package com.ns.greg.library.easy_encryptor.des;
-
-/**
- * Created by Gregory on 2017/7/11.
+package com.ns.greg.library.easy_encryptor.des; /**
+ * @author Gregory
+ * @since 2017/7/11
  */
 
 import android.support.annotation.NonNull;
@@ -205,19 +204,16 @@ public class DESEncryptor {
 
     public Builder setAlgorithm(@NonNull @DESAlgorithm String algorithm) {
       this.algorithm = algorithm;
-
       return this;
     }
 
     public Builder setCipher(@NonNull @CipherMode String cipher) {
       this.cipher = cipher;
-
       return this;
     }
 
     public Builder setPadding(@NonNull @PaddingType String padding) {
       this.padding = padding;
-
       return this;
     }
 

@@ -1,7 +1,8 @@
 package com.ns.greg.library.easy_encryptor;
 
 /**
- * Created by Gregory on 2017/7/11.
+ * @author Gregory
+ * @since 2017/7/11
  */
 
 public class ConvertsUtils {
@@ -51,7 +52,6 @@ public class ConvertsUtils {
     int index = 0;
     hexChars[index] = HEX_DIGITS[value >>> 4];
     hexChars[index + 1] = HEX_DIGITS[value & 0x0F];
-
     return new String(hexChars);
   }
 

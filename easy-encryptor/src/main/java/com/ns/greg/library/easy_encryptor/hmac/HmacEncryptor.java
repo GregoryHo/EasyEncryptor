@@ -11,7 +11,8 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
- * Created by Gregory on 2017/7/11.
+ * @author Gregory
+ * @since 2017/7/11
  */
 
 public class HmacEncryptor {

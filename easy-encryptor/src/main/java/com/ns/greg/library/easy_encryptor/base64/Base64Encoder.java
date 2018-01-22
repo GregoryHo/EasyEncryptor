@@ -8,7 +8,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * Created by Gregory on 2017/7/11.
+ * @author Gregory
+ * @since 2017/7/11
  */
 
 public class Base64Encoder {
